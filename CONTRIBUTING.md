@@ -6,7 +6,7 @@ Thank you for your interest in contributing! 🎉
 
 ### 1. Fork the Repository
 ```bash
-git clone https://github.com/Qyroxen/Penetration-Testing-Kit.git
+git clone https://github.com/AetherCodeHQ/Penetration-Testing-Kit.git
 cd Penetration-Testing-Kit
 ```
 
