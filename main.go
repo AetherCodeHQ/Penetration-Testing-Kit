@@ -1,26 +1,37 @@
+
 package main
 
 import (
 	"fmt"
+	"net"
 	"os"
+	"strconv"
+	"strings"
+	"time"
 )
 
-// penetration_testing_kit - Automated pentest toolkit
-func penetration_testing_kit(path string) {
-	fmt.Println("========================================")
-	fmt.Println("  Penetration-Testing-Kit")
-	fmt.Println("  Automated pentest toolkit")
-	fmt.Println("========================================")
-	fmt.Println()
-	fmt.Println("Target:", path)
-	fmt.Println("Processing...")
-	fmt.Println("Done!")
-}
-
 func main() {
-	path := "."
+	host := "127.0.0.1"
+	ports := []int{22, 80, 443, 8080}
 	if len(os.Args) > 1 {
-		path = os.Args[1]
+		host = os.Args[1]
 	}
-	penetration_testing_kit(path)
+	if len(os.Args) > 2 {
+		ports = ports[:0]
+		for _, q := range strings.Split(os.Args[2], ",") {
+			if n, err := strconv.Atoi(q); err == nil {
+				ports = append(ports, n)
+			}
+		}
+	}
+	for _, p := range ports {
+		addr := fmt.Sprintf("%s:%d", host, p)
+		c, err := net.DialTimeout("tcp", addr, 2*time.Second)
+		if err != nil {
+			fmt.Printf("%-24s closed\n", addr)
+			continue
+		}
+		fmt.Printf("%-24s open\n", addr)
+		c.Close()
+	}
 }
