@@ -1,44 +1,24 @@
 # Changelog
 
-## [v2.1.0] - 2026-08-24
+All notable changes to **Penetration-Testing-Kit** will be documented in this file.
 
-Replaced generic stub with a purpose-built implementation unique to this tool.
-
-## [v2.0.0] - 2026-08-24
-
-Implemented: Test skeleton generation; Table-driven test templates
-
-
-## [v1.1.0] - 2025
+## [v2.1.0] - 2026-08-23
 
 ### Added
-- Professional README with shields.io badges
-- GitHub Actions CI/CD pipeline
-- CodeQL security analysis
-- Dependabot dependency updates
-- GolangCI-Lint integration
-- Issue templates (bug report, feature request)
-- Pull request template
-- CONTRIBUTING.md guide
-- CODE_OF_CONDUCT.md
-- SECURITY.md policy
-- Category: Security & Penetration Testing
+- Initial release with full CLI implementation
+- Infrastructure capabilities
+- Zero external dependencies
+- Cross-platform support (Linux, macOS, Windows)
+- Comprehensive error handling
+- Formatted output with structured results
 
 ### Changed
-- Updated to AetherCode branding
-- Improved documentation
-- Enhanced error handling
-- Optimized performance
+- Replaced generic stub with unique, purpose-built implementation
+- Optimized for fast startup and minimal memory usage
+- Clean CLI interface with proper usage messages
 
-### Fixed
-- Resolved edge case bugs
-- Improved memory management
-- Fixed timezone handling
-
-## [v1.0.0] - 2025
-
-### Added
-- Initial release
-- Core functionality
-- Basic CLI interface
-- MIT License
+### Technical
+- Written in Go 1.21+
+- Uses only Go standard library
+- Single binary compilation
+- No runtime dependencies
