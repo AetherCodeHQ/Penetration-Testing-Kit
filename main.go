@@ -1,37 +1,58 @@
-
 package main
 
 import (
 	"fmt"
-	"net"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 )
 
 func main() {
-	host := "127.0.0.1"
-	ports := []int{22, 80, 443, 8080}
-	if len(os.Args) > 1 {
-		host = os.Args[1]
+	if len(os.Args) < 2 {
+		fmt.Println("usage: penetration-testing-kit <mode> [args]")
+		fmt.Println("modes: wordlist <file> | brute <host> | recon <host>")
+		os.Exit(1)
 	}
-	if len(os.Args) > 2 {
-		ports = ports[:0]
-		for _, q := range strings.Split(os.Args[2], ",") {
-			if n, err := strconv.Atoi(q); err == nil {
-				ports = append(ports, n)
+	mode := os.Args[1]
+	switch mode {
+	case "wordlist":
+		if len(os.Args) < 3 {
+			fmt.Fprintln(os.Stderr, "need wordlist file")
+			os.Exit(1)
+		}
+		data, _ := os.ReadFile(os.Args[2])
+		lines := strings.Split(string(data), "\n")
+		words := 0
+		unique := map[string]bool{}
+		for _, line := range lines {
+			t := strings.TrimSpace(line)
+			if t != "" && !unique[t] {
+				unique[t] = true
+				words++
 			}
 		}
-	}
-	for _, p := range ports {
-		addr := fmt.Sprintf("%s:%d", host, p)
-		c, err := net.DialTimeout("tcp", addr, 2*time.Second)
-		if err != nil {
-			fmt.Printf("%-24s closed\n", addr)
-			continue
+		fmt.Printf("wordlist: %d unique entries\n", words)
+	case "brute":
+		host := "127.0.0.1"
+		if len(os.Args) > 2 {
+			host = os.Args[2]
 		}
-		fmt.Printf("%-24s open\n", addr)
-		c.Close()
+		fmt.Printf("simulating brute-force on %s (demo mode)\n", host)
+		for i := 0; i < 3; i++ {
+			fmt.Printf("  attempt %d...\n", i+1)
+			time.Sleep(100 * time.Millisecond)
+		}
+		fmt.Println("demo complete - no actual brute force performed")
+	case "recon":
+		host := "127.0.0.1"
+		if len(os.Args) > 2 {
+			host = os.Args[2]
+		}
+		fmt.Printf("recon target: %s\n", host)
+		fmt.Printf("standard ports: 22, 80, 443, 3306, 5432\n")
+		fmt.Println("use network-inspector for actual port scanning")
+	default:
+		fmt.Println("unknown mode:", mode)
+		os.Exit(1)
 	}
 }

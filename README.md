@@ -149,7 +149,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 Part of [AetherCode Core](https://github.com/AetherCode-Core) ecosystem.
 
-![Version](https://img.shields.io/badge/Version-v2.0.0-00ADD8?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-v2.1.0-00ADD8?style=for-the-badge)
 
 
 ## What's new in v2.0.0
